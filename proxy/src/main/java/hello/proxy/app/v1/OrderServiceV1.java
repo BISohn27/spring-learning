@@ -2,5 +2,5 @@ package hello.proxy.app.v1;
 
 public interface OrderServiceV1 {
 
-    public void orderItem(String orderItem);
+    public void orderItem(String orderId);
 }
