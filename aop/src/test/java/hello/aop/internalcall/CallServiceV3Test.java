@@ -1,0 +1,28 @@
+package hello.aop.internalcall;
+
+import hello.aop.internalcall.aop.CallLogAspect;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+
+@Import(CallLogAspect.class)
+@SpringBootTest
+public class CallServiceV3Test {
+
+    @Autowired
+    CallServiceV3 call;
+
+    @Autowired
+    InternalService internalService;
+
+    @Test
+    public void external() {
+        call.external();
+    }
+
+    @Test
+    public void internal() {
+        internalService.internal();
+    }
+}
