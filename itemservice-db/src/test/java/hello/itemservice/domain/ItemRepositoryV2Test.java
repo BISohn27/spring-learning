@@ -4,16 +4,12 @@ import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 import hello.itemservice.repository.memory.MemoryItemRepository;
+import hello.itemservice.repository.v2.ItemRepositoryV2;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
@@ -21,10 +17,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest //java/main SpringbootApplication 어노테이션을 찾아서 해당 어노테이션이 있는 applications 클래스의 설정 값을 적용
 @Transactional
-class ItemRepositoryTest {
+class ItemRepositoryV2Test {
 
     @Autowired
     ItemRepository itemRepository;
+
+    @Autowired
+    ItemRepositoryV2 itemRepositoryV2;
 
  /*   @Autowired
     PlatformTransactionManager transactionManager;
@@ -53,10 +52,10 @@ class ItemRepositoryTest {
         Item item = new Item("itemA", 10000, 10);
 
         //when
-        Item savedItem = itemRepository.save(item);
+        Item savedItem = itemRepositoryV2.save(item);
 
         //then
-        Item findItem = itemRepository.findById(item.getId()).get();
+        Item findItem = itemRepositoryV2.findById(item.getId()).get();
         assertThat(findItem).isEqualTo(savedItem);
     }
 
